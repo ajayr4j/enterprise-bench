@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security issue or data leak
+    url: https://github.com/devrev/enterprise-bench/security/policy
+    about: Please report vulnerabilities and data safety issues privately.
+  - name: General support
+    url: https://github.com/devrev/enterprise-bench/discussions
+    about: Ask setup and usage questions here if Discussions are enabled.
