@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import stat
 import tomllib
@@ -11,6 +12,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+TASKS_ROOT = ROOT / "tasks"
 REQUIRED_COMMUNITY_FILES = [
     "README.md",
     "LICENSE",
@@ -76,6 +78,19 @@ def load_dataset_tasks(errors: list[str]) -> set[str]:
         tasks.add(name.split("/")[-1])
         if not task.get("digest", "").startswith("sha256:"):
             fail(errors, f"dataset.toml task {name} missing sha256 digest")
+    for file_entry in data.get("files", []):
+        rel_path = file_entry.get("path", "")
+        expected = file_entry.get("digest", "")
+        if not rel_path:
+            fail(errors, "dataset.toml has file entry without path")
+            continue
+        file_path = ROOT / rel_path
+        if not file_path.exists():
+            fail(errors, f"dataset.toml references missing file: {rel_path}")
+            continue
+        actual = "sha256:" + hashlib.sha256(file_path.read_bytes()).hexdigest()
+        if actual != expected:
+            fail(errors, f"dataset.toml digest mismatch for {rel_path}")
     return tasks
 
 
@@ -131,9 +146,10 @@ def main() -> int:
             fail(errors, f"missing community file: {rel}")
 
     dataset_tasks = load_dataset_tasks(errors)
+    search_root = TASKS_ROOT if TASKS_ROOT.exists() else ROOT
     task_dirs = [
         p
-        for p in ROOT.iterdir()
+        for p in search_root.iterdir()
         if (p / "task.toml").exists() and p.name not in IGNORED_TASK_DIRS
     ]
 
