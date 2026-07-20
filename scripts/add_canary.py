@@ -154,7 +154,11 @@ def stamp_zip(zip_path: Path, check: bool) -> None:
             new_contents[name] = new_text.encode("utf-8")
         else:
             is_array_json = name.endswith(".json") and text.lstrip().startswith("[")
-            reason = "array-root data file, covered by sidecar" if is_array_json else "already stamped"
+            reason = (
+                "array-root data file, covered by sidecar"
+                if is_array_json
+                else "already stamped"
+            )
             _log_skip(inner, reason)
             new_contents[name] = raw
 
