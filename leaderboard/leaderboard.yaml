@@ -142,13 +142,6 @@ columns:
   accessor: metrics.n_trials
   type: number
   align: right
-- id: cost
-  header: Cost
-  accessor: metrics.total_cost_usd
-  display_accessor: metrics.display_total_cost_usd
-  display_type: text
-  type: number
-  align: right
 
 # Ranking rules are evaluated in order. accessor must point to metadata.* or metrics.*. direction is asc or desc; nulls is optional: first or last.
 rank_by:
