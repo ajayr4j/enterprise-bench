@@ -71,18 +71,19 @@ If you add new records, update the relevant docs and any affected task criteria.
 
 ## Submit agent results
 
-Results should include:
+To request leaderboard inclusion:
 
-- Agent name and version.
-- Model name and provider.
-- Harbor version.
-- Dataset version or commit SHA.
-- Command used.
-- Attempts per task (`-k`) and concurrency (`-n`).
-- Job link or archived `jobs/` output.
-- Any environment notes that could affect reproducibility.
+- Upload the completed job to Harbor Hub and make it public.
+- Confirm the job and its trajectories are accessible while logged out.
+- Copy `leaderboard/row-template.yaml` to a new file in
+  `leaderboard/entries/` and complete every field.
+- Include the source job UUID and public Harbor job URL in the entry header.
+- Open a pull request with one leaderboard entry.
 
-See `docs/submit-results.md` for the full checklist.
+Maintainers review and merge valid entries, then publish them through the
+team-managed Harbor Hub workflow.
+
+See `docs/submit-results.md` for the full checklist and review workflow.
 
 ## Pull request checklist
 
