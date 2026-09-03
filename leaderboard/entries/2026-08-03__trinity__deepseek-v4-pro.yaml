@@ -1,9 +1,9 @@
-# Trinity / DeepSeek V4 Pro
+# Trinity-EFC / DeepSeek V4 Pro
 # Source job: 02b0a6e5-ce65-4a5e-9494-feab0f5f5ed4
 # https://hub.harborframework.com/jobs/02b0a6e5-ce65-4a5e-9494-feab0f5f5ed4
 rows:
 - metadata:
-    agent_display_name: Trinity
+    agent_display_name: Trinity-EFC
     model_display_name: DeepSeek V4 Pro
     agent_org_display_name: Ajay Raj S
     model_org_display_name: High-Flyer
